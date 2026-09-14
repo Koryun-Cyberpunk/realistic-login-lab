@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign in</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<main class="page">
+    <section class="login-card">
+        <div class="brand">ACME</div>
+        <h1>Welcome back</h1>
+        <p class="subtitle">Sign in to continue to your account.</p>
+
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <form method="post" action="/login" autocomplete="on">
+            <label for="username">Email or username</label>
+            <input id="username" name="username" type="text"
+                   autocomplete="username" required autofocus>
+
+            <label for="password">Password</label>
+            <div class="password-row">
+                <input id="password" name="password" type="password"
+                       autocomplete="current-password" required>
+                <button type="button" class="show-btn"
+                        onclick="togglePassword()">Show</button>
+            </div>
+
+            <div class="options">
+                <label class="remember">
+                    <input type="checkbox" name="remember">
+                    <span>Remember me</span>
+                </label>
+                <a href="#" onclick="return false;">Forgot password?</a>
+            </div>
+
+            <button class="login-btn" type="submit">Sign in</button>
+        </form>
+
+        <p class="signup">Don't have an account? <a href="#" onclick="return false;">Create one</a></p>
+    </section>
+</main>
+
+<script>
+function togglePassword() {
+    const input = document.getElementById("password");
+    const button = document.querySelector(".show-btn");
+    if (input.type === "password") {
+        input.type = "text";
+        button.textContent = "Hide";
+    } else {
+        input.type = "password";
+        button.textContent = "Show";
+    }
+}
+</script>
+</body>
+</html>

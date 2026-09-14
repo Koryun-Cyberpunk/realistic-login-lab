@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Account</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<main class="page">
+    <section class="login-card dashboard">
+        <div class="brand">ACME</div>
+        <h1>Account</h1>
+        <p class="subtitle">You are signed in as <strong>{{ username }}</strong>.</p>
+        <form method="post" action="/logout">
+            <button class="login-btn" type="submit">Sign out</button>
+        </form>
+    </section>
+</main>
+</body>
+</html>
