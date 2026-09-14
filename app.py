@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import os
 import time
+import hmac
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "change-this-in-production")
@@ -14,11 +15,7 @@ LAB_PASSWORD = os.environ.get("LAB_PASSWORD", "A11b12c13d14e15$")
 DELAY = float(os.environ.get("LAB_DELAY", "0.030"))
 
 def check_password(candidate: str) -> bool:
-    for supplied, expected in zip(candidate, LAB_PASSWORD):
-        if supplied != expected:
-            return False
-        time.sleep(DELAY)
-    return len(candidate) == len(LAB_PASSWORD)
+    return hmac.compare_digest(candidate, LAB_PASSWORD)
 
 @app.get("/")
 def home():
